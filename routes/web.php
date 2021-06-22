@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use App \ Models \ Task ;
+use App \ Models \ Flight ;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,18 +35,24 @@ return view ('show' , compact('task'));
 });
 
 
-Route::get('app', function () {
-    $tasks = DB::table('tasks')->get();
+Route::get('todo', function () {
+  //  $tasks = DB::table('tasks')->get();
+    $tasks = Task::all();
 
     return view('todo', compact('tasks'));
 });
 
 Route::post('store', function (Request $request) {
-        DB::table('tasks')->insert([
-            'title' => $request ->title,
-        ]
-
-        );
+    $task = new Task;
+    $task->title = $request->title;
+    $tasks->save();
         return redirect() ->back();
 
     });
+
+    Route::get('flight/{id}', function ($id) {
+
+        $flight = Flight::Find();
+        $flight->delete;
+        });
+
